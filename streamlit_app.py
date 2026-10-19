@@ -174,6 +174,16 @@ st.markdown(
         line-height: 1.7;
     }
 
+    .st-key-award-image {
+        width: 100%;
+        max-width: 800px;
+        margin: .85rem auto 1.8rem;
+    }
+
+    .st-key-award-image [data-testid="stImage"] { display: flex; justify-content: center; }
+    .st-key-award-image img { width: 100%; height: auto; object-fit: contain; }
+    .award-caption { margin: .55rem 0 0; color: var(--muted); font-size: .9rem; text-align: center; }
+
     .vision-panel {
         margin-top: 1.25rem;
         padding: 1.5rem;
@@ -259,10 +269,13 @@ with about:
     )
     st.markdown(
         '<div class="award-line"><strong>꾸준한 실천과 나눔</strong><br>'
-        '맡은 일을 책임감 있게 해내고 봉사정신을 실천한 점을 인정받아 '
+        '맡은 일에 책임감을 가지고 꾸준히 실천하며, 주변에 도움이 되는 일을 해온 점을 인정받아 '
         '한국중등교장협의회장 선행상을 받았습니다.</div>',
         unsafe_allow_html=True,
     )
+    with st.container(key="award-image"):
+        st.image("IMG/나라 선행상.jpg", width="stretch")
+        st.markdown('<div class="award-caption">한국중등교장협의회장 선행상</div>', unsafe_allow_html=True)
     st.markdown('<div class="section-kicker">MY VALUES</div>', unsafe_allow_html=True)
     st.markdown('<h2 class="section-title">받은 마음을 다시 나누기</h2>', unsafe_allow_html=True)
     st.markdown(
