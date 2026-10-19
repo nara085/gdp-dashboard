@@ -56,21 +56,39 @@ st.markdown(
     .hero p { margin: 0; color: var(--muted); font-size: 1.08rem; }
 
     .stTabs [data-baseweb="tab-list"] {
-        gap: 2.1rem;
-        border-bottom: 1px solid var(--line);
+        gap: .6rem;
+        border-bottom: 1px solid #CBD5E1;
         background: transparent;
     }
 
-    .stTabs [data-baseweb="tab"] {
-        height: 3.7rem;
-        padding: 0 .1rem;
-        color: var(--muted);
-        font-size: .91rem;
+    .stTabs button[data-baseweb="tab"] {
+        min-height: 3.35rem;
+        padding: .6rem .9rem;
+        border: 1px solid #CBD5E1 !important;
+        border-radius: 4px 4px 0 0;
+        background-color: #F1F5F9 !important;
+        color: #334155 !important;
+        font-size: .92rem;
         font-weight: 700;
     }
 
-    .stTabs [aria-selected="true"] { color: var(--green) !important; }
-    .stTabs [data-baseweb="tab-highlight"] { background: var(--coral); height: 3px; }
+    .stTabs button[data-baseweb="tab"][aria-selected="true"] {
+        border-color: #1E3A5F !important;
+        background-color: #1E3A5F !important;
+        color: #FFFFFF !important;
+    }
+
+    .stTabs button[data-baseweb="tab"]:hover {
+        background-color: #DBEAFE !important;
+        color: #334155 !important;
+    }
+
+    .stTabs button[data-baseweb="tab"][aria-selected="true"]:hover {
+        background-color: #DBEAFE !important;
+        color: #334155 !important;
+    }
+
+    .stTabs [data-baseweb="tab-highlight"] { background: transparent; height: 0; }
     .stTabs [data-baseweb="tab-border"] { background: transparent; }
 
     .section-kicker {
@@ -169,8 +187,12 @@ st.markdown(
         .hero { padding: 1rem 0 1.8rem; }
         .hero p { font-size: .94rem; }
         div[data-testid="stImage"] { display: flex; justify-content: center; }
-        .stTabs [data-baseweb="tab-list"] { gap: 1.1rem; }
-        .stTabs [data-baseweb="tab"] { font-size: .82rem; }
+        .stTabs [data-baseweb="tab-list"] { gap: .35rem; }
+        .stTabs button[data-baseweb="tab"] {
+            min-height: 3rem;
+            padding: .55rem .58rem;
+            font-size: .8rem;
+        }
         .info-grid { grid-template-columns: 1fr; gap: .65rem; }
         .activity-grid { grid-template-columns: 1fr; gap: .65rem; }
         .info-item { min-height: auto; }
