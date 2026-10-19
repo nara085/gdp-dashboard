@@ -1,151 +1,276 @@
 import streamlit as st
-import pandas as pd
-import math
-from pathlib import Path
 
-# Set the title and favicon that appear in the Browser's tab bar.
+
 st.set_page_config(
-    page_title='GDP dashboard',
-    page_icon=':earth_americas:', # This is an emoji shortcode. Could be a URL too.
+    page_title="유나라 | 자기소개",
+    page_icon="✳️",
+    layout="wide",
+    initial_sidebar_state="collapsed",
 )
 
-# -----------------------------------------------------------------------------
-# Declare some useful functions.
-
-@st.cache_data
-def get_gdp_data():
-    """Grab GDP data from a CSV file.
-
-    This uses caching to avoid having to read the file every time. If we were
-    reading from an HTTP endpoint instead of a file, it's a good idea to set
-    a maximum age to the cache with the TTL argument: @st.cache_data(ttl='1d')
+st.markdown(
     """
+    <style>
+    @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Gowun+Batang:wght@400;700&display=swap');
 
-    # Instead of a CSV on disk, you could read from an HTTP endpoint here too.
-    DATA_FILENAME = Path(__file__).parent/'data/gdp_data.csv'
-    raw_gdp_df = pd.read_csv(DATA_FILENAME)
+    :root {
+        --ink: #202b27;
+        --muted: #66736d;
+        --green: #176b52;
+        --lime: #d8ed8d;
+        --coral: #ef765c;
+        --paper: #f5f7f2;
+        --line: #dfe5dc;
+    }
 
-    MIN_YEAR = 1960
-    MAX_YEAR = 2022
+    .stApp {
+        background:
+            radial-gradient(ellipse at 90% 2%, rgba(216, 237, 141, .32), transparent 28rem),
+            linear-gradient(135deg, #f5f7f2 0%, #edf3ed 55%, #f8f5ed 100%);
+        color: var(--ink);
+        font-family: 'DM Sans', 'Noto Sans KR', sans-serif;
+    }
 
-    # The data above has columns like:
-    # - Country Name
-    # - Country Code
-    # - [Stuff I don't care about]
-    # - GDP for 1960
-    # - GDP for 1961
-    # - GDP for 1962
-    # - ...
-    # - GDP for 2022
-    #
-    # ...but I want this instead:
-    # - Country Name
-    # - Country Code
-    # - Year
-    # - GDP
-    #
-    # So let's pivot all those year-columns into two: Year and GDP
-    gdp_df = raw_gdp_df.melt(
-        ['Country Code'],
-        [str(x) for x in range(MIN_YEAR, MAX_YEAR + 1)],
-        'Year',
-        'GDP',
+    [data-testid="stHeader"] { background: transparent; }
+    [data-testid="stMainBlockContainer"] { max-width: 1100px; padding-top: 3.2rem; }
+
+    .eyebrow {
+        color: var(--green);
+        font-size: .76rem;
+        font-weight: 700;
+        letter-spacing: .12em;
+        text-transform: uppercase;
+    }
+
+    .hero {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        gap: 2rem;
+        padding: 1rem 0 2.7rem;
+        border-bottom: 1px solid var(--line);
+    }
+
+    .hero h1 {
+        margin: .45rem 0 .55rem;
+        color: var(--ink);
+        font-family: 'Gowun Batang', 'Noto Serif KR', serif;
+        font-size: clamp(3rem, 7vw, 5.5rem);
+        font-weight: 700;
+        line-height: 1.12;
+    }
+
+    .hero p { margin: 0; color: var(--muted); font-size: 1.08rem; }
+
+    .hero-mark {
+        display: grid;
+        place-items: center;
+        flex: 0 0 116px;
+        width: 116px;
+        height: 116px;
+        border: 1px solid rgba(23, 107, 82, .2);
+        border-radius: 50%;
+        background: var(--lime);
+        color: var(--green);
+        font-family: 'Gowun Batang', serif;
+        font-size: 2.6rem;
+        transform: rotate(8deg);
+    }
+
+    .stTabs [data-baseweb="tab-list"] {
+        gap: 2.1rem;
+        border-bottom: 1px solid var(--line);
+        background: transparent;
+    }
+
+    .stTabs [data-baseweb="tab"] {
+        height: 3.7rem;
+        padding: 0 .1rem;
+        color: var(--muted);
+        font-size: .91rem;
+        font-weight: 700;
+    }
+
+    .stTabs [aria-selected="true"] { color: var(--green) !important; }
+    .stTabs [data-baseweb="tab-highlight"] { background: var(--coral); height: 3px; }
+    .stTabs [data-baseweb="tab-border"] { background: transparent; }
+
+    .section-kicker {
+        margin: 2.1rem 0 .45rem;
+        color: var(--coral);
+        font-size: .75rem;
+        font-weight: 700;
+        letter-spacing: .08em;
+    }
+
+    .section-title {
+        margin: 0 0 1.35rem;
+        color: var(--ink);
+        font-family: 'Gowun Batang', 'Noto Serif KR', serif;
+        font-size: 1.8rem;
+        font-weight: 700;
+    }
+
+    .intro-copy {
+        max-width: 720px;
+        color: #46534d;
+        font-size: 1.05rem;
+        line-height: 1.9;
+    }
+
+    .info-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 1rem;
+        margin: 1.7rem 0 1rem;
+    }
+
+    .info-item {
+        min-height: 114px;
+        padding: 1.15rem 1.25rem;
+        border: 1px solid var(--line);
+        border-radius: 5px;
+        background: rgba(255, 255, 255, .62);
+    }
+
+    .info-label { margin-bottom: .6rem; color: var(--muted); font-size: .78rem; }
+    .info-value { color: var(--ink); font-size: 1rem; font-weight: 700; line-height: 1.55; }
+
+    .quote-block {
+        margin: 1.4rem 0;
+        padding: 1.2rem 1.4rem;
+        border-left: 3px solid var(--coral);
+        background: rgba(255, 255, 255, .58);
+        color: var(--ink);
+        font-family: 'Gowun Batang', 'Noto Serif KR', serif;
+        font-size: 1.18rem;
+        line-height: 1.8;
+    }
+
+    .award-line {
+        padding: 1rem 1.15rem;
+        border-radius: 5px;
+        background: #e5eedf;
+        color: #285440;
+        font-size: .94rem;
+        line-height: 1.7;
+    }
+
+    .vision-panel {
+        margin-top: 1.25rem;
+        padding: 1.5rem;
+        border-radius: 5px;
+        background: var(--green);
+        color: #fff;
+    }
+
+    .vision-panel .info-label { color: #c3d9ce; }
+    .vision-panel .info-value { color: #fff; font-size: 1.3rem; }
+    .vision-panel p { margin: .75rem 0 0; color: #e1eee7; line-height: 1.8; }
+
+    .stCaption { color: var(--muted); }
+
+    @media (max-width: 640px) {
+        [data-testid="stMainBlockContainer"] { padding: 1.5rem 1.1rem 2rem; }
+        .hero { align-items: center; gap: 1rem; padding-bottom: 1.8rem; }
+        .hero p { font-size: .94rem; }
+        .hero-mark { flex-basis: 76px; width: 76px; height: 76px; font-size: 1.8rem; }
+        .stTabs [data-baseweb="tab-list"] { gap: 1.1rem; }
+        .stTabs [data-baseweb="tab"] { font-size: .82rem; }
+        .info-grid { grid-template-columns: 1fr; gap: .65rem; }
+        .info-item { min-height: auto; }
+    }
+    </style>
+    """,
+    unsafe_allow_html=True,
+)
+
+st.markdown(
+    """
+    <div class="hero">
+        <div>
+            <div class="eyebrow">A little about me</div>
+            <h1>안녕하세요,<br>유나라입니다.</h1>
+            <p>배움을 꾸준히 이어가며, 받은 마음을 나누는 사람</p>
+        </div>
+        <div class="hero-mark" aria-hidden="true">YN</div>
+    </div>
+    """,
+    unsafe_allow_html=True,
+)
+
+home, about, vision = st.tabs(["HOME", "ABOUT ME", "VISION"])
+
+with home:
+    st.markdown('<div class="section-kicker">01 / INTRODUCTION</div>', unsafe_allow_html=True)
+    st.markdown('<h2 class="section-title">저를 소개합니다</h2>', unsafe_allow_html=True)
+    st.markdown(
+        '<p class="intro-copy">경복비즈니스고등학교 IT과에 재학 중인 3학년 4반 유나라입니다. '
+        '새로운 것을 배우고 꾸준히 실천하는 과정에서 보람을 느낍니다. '
+        '좋아하는 콘텐츠를 즐기며 다양한 이야기를 만나는 시간도 소중하게 생각합니다.</p>',
+        unsafe_allow_html=True,
+    )
+    st.markdown(
+        """
+        <div class="info-grid">
+            <div class="info-item"><div class="info-label">SCHOOL</div><div class="info-value">경복비즈니스고등학교<br>3학년 4반 · IT과</div></div>
+            <div class="info-item"><div class="info-label">NAME</div><div class="info-value">유나라</div></div>
+            <div class="info-item"><div class="info-label">MY INTERESTS</div><div class="info-value">노래 감상<br>영화 · 드라마 · 예능 등 OTT 시청</div></div>
+        </div>
+        """,
+        unsafe_allow_html=True,
     )
 
-    # Convert years from string to integers
-    gdp_df['Year'] = pd.to_numeric(gdp_df['Year'])
+with about:
+    st.markdown('<div class="section-kicker">02 / ABOUT ME</div>', unsafe_allow_html=True)
+    st.markdown('<h2 class="section-title">꾸준함으로 쌓은 책임감</h2>', unsafe_allow_html=True)
+    st.markdown(
+        '<p class="intro-copy">아침자습 시간에 결석 없이 꾸준히 출석하며, 매일 아침 무엇을 공부할지 계획하고 '
+        '실천해 왔습니다. 작은 약속과 일상의 노력을 이어온 경험은 맡은 일을 책임감 있게 해내는 힘이 되었습니다.</p>',
+        unsafe_allow_html=True,
+    )
+    st.markdown(
+        '<div class="award-line"><strong>꾸준한 실천과 나눔</strong><br>'
+        '맡은 일을 책임감 있게 해내고 봉사정신을 실천한 점을 인정받아 '
+        '한국중등교장협의회장 선행상을 받았습니다.</div>',
+        unsafe_allow_html=True,
+    )
+    st.markdown('<div class="section-kicker">MY VALUES</div>', unsafe_allow_html=True)
+    st.markdown('<h2 class="section-title">받은 마음을 다시 나누기</h2>', unsafe_allow_html=True)
+    st.markdown(
+        '<div class="quote-block">“받은 은혜를 잊지 않고, 다른 사람에게 베풀며 살아가자.”</div>',
+        unsafe_allow_html=True,
+    )
+    st.markdown(
+        '<p class="intro-copy">이 가치관은 친할머니의 가르침에서 비롯되었습니다. 할머니께서는 약속을 지키는 '
+        '것과 도움을 받았을 때 감사하는 태도를 늘 강조하셨습니다. 그리고 여유가 있을 때 다른 사람에게 베풀면 '
+        '그 마음이 결국 자신에게 돌아온다고 말씀하셨습니다. 저도 그 가르침을 기억하며 감사와 나눔을 실천하고 싶습니다.</p>',
+        unsafe_allow_html=True,
+    )
 
-    return gdp_df
+with vision:
+    st.markdown('<div class="section-kicker">03 / VISION</div>', unsafe_allow_html=True)
+    st.markdown('<h2 class="section-title">배움을 데이터의 가치로</h2>', unsafe_allow_html=True)
+    st.markdown(
+        '<p class="intro-copy">소프트웨어공학과에 진학해 전공 지식과 실무 역량을 차근차근 키우고, '
+        'IT 분야 중에서도 데이터를 다루는 기업에 취업하는 것이 목표입니다.</p>',
+        unsafe_allow_html=True,
+    )
+    st.markdown(
+        """
+        <div class="vision-panel">
+            <div class="info-label">MY GOAL</div>
+            <div class="info-value">소프트웨어공학과 진학 → 데이터 관련 IT 기업 취업</div>
+            <p>꾸준히 배우고 책임감 있게 경험을 쌓아, 데이터를 통해 사람과 세상에 도움이 되는 일을 하고 싶습니다.</p>
+        </div>
+        <div class="info-grid">
+            <div class="info-item"><div class="info-label">NEXT STEP</div><div class="info-value">소프트웨어공학 전공 공부</div></div>
+            <div class="info-item"><div class="info-label">FIELD</div><div class="info-value">IT · 데이터</div></div>
+            <div class="info-item"><div class="info-label">DIRECTION</div><div class="info-value">꾸준한 학습과 실천</div></div>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
 
-gdp_df = get_gdp_data()
-
-# -----------------------------------------------------------------------------
-# Draw the actual page
-
-# Set the title that appears at the top of the page.
-'''
-# :earth_americas: GDP dashboard
-
-Browse GDP data from the [World Bank Open Data](https://data.worldbank.org/) website. As you'll
-notice, the data only goes to 2022 right now, and datapoints for certain years are often missing.
-But it's otherwise a great (and did I mention _free_?) source of data.
-'''
-
-# Add some spacing
-''
-''
-
-min_value = gdp_df['Year'].min()
-max_value = gdp_df['Year'].max()
-
-from_year, to_year = st.slider(
-    'Which years are you interested in?',
-    min_value=min_value,
-    max_value=max_value,
-    value=[min_value, max_value])
-
-countries = gdp_df['Country Code'].unique()
-
-if not len(countries):
-    st.warning("Select at least one country")
-
-selected_countries = st.multiselect(
-    'Which countries would you like to view?',
-    countries,
-    ['DEU', 'FRA', 'GBR', 'BRA', 'MEX', 'JPN'])
-
-''
-''
-''
-
-# Filter the data
-filtered_gdp_df = gdp_df[
-    (gdp_df['Country Code'].isin(selected_countries))
-    & (gdp_df['Year'] <= to_year)
-    & (from_year <= gdp_df['Year'])
-]
-
-st.header('GDP over time', divider='gray')
-
-''
-
-st.line_chart(
-    filtered_gdp_df,
-    x='Year',
-    y='GDP',
-    color='Country Code',
-)
-
-''
-''
-
-
-first_year = gdp_df[gdp_df['Year'] == from_year]
-last_year = gdp_df[gdp_df['Year'] == to_year]
-
-st.header(f'GDP in {to_year}', divider='gray')
-
-''
-
-cols = st.columns(4)
-
-for i, country in enumerate(selected_countries):
-    col = cols[i % len(cols)]
-
-    with col:
-        first_gdp = first_year[first_year['Country Code'] == country]['GDP'].iat[0] / 1000000000
-        last_gdp = last_year[last_year['Country Code'] == country]['GDP'].iat[0] / 1000000000
-
-        if math.isnan(first_gdp):
-            growth = 'n/a'
-            delta_color = 'off'
-        else:
-            growth = f'{last_gdp / first_gdp:,.2f}x'
-            delta_color = 'normal'
-
-        st.metric(
-            label=f'{country} GDP',
-            value=f'{last_gdp:,.0f}B',
-            delta=growth,
-            delta_color=delta_color
-        )
+st.markdown("<br>", unsafe_allow_html=True)
+st.caption("유나라 · 경복비즈니스고등학교 IT과")
