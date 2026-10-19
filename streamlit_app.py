@@ -105,6 +105,22 @@ st.markdown(
         margin: 1.7rem 0 1rem;
     }
 
+    .activity-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 1rem;
+        margin: 1.7rem 0 1rem;
+    }
+
+    .activity-list {
+        margin: 0;
+        padding-left: 1.2rem;
+        color: #46534d;
+        line-height: 1.8;
+    }
+
+    .activity-list li + li { margin-top: .55rem; }
+
     .info-item {
         min-height: 114px;
         padding: 1.15rem 1.25rem;
@@ -158,6 +174,7 @@ st.markdown(
         .stTabs [data-baseweb="tab-list"] { gap: 1.1rem; }
         .stTabs [data-baseweb="tab"] { font-size: .82rem; }
         .info-grid { grid-template-columns: 1fr; gap: .65rem; }
+        .activity-grid { grid-template-columns: 1fr; gap: .65rem; }
         .info-item { min-height: auto; }
     }
     </style>
@@ -182,7 +199,9 @@ with hero_photo:
 
 st.markdown('<div class="hero-divider"></div>', unsafe_allow_html=True)
 
-home, about, skills, vision = st.tabs(["HOME", "ABOUT ME", "SKILLS", "VISION"])
+home, about, skills, activities, vision = st.tabs(
+    ["HOME", "ABOUT ME", "SKILLS", "ACTIVITIES", "VISION"]
+)
 
 with home:
     st.markdown('<div class="section-kicker">01 / INTRODUCTION</div>', unsafe_allow_html=True)
@@ -256,8 +275,36 @@ with skills:
         unsafe_allow_html=True,
     )
 
+with activities:
+    st.markdown('<div class="section-kicker">04 / ACTIVITIES</div>', unsafe_allow_html=True)
+    st.markdown('<h2 class="section-title">함께 이끌고 소통한 경험</h2>', unsafe_allow_html=True)
+    st.markdown(
+        """
+        <div class="activity-grid">
+            <div class="info-item">
+                <div class="info-label">학생회 · IT과 부장</div>
+                <div class="info-value">2학년부터 3학년까지</div>
+                <ul class="activity-list">
+                    <li>학생회 SNS 게시글을 관리했습니다.</li>
+                    <li>축제에서 학생들을 인솔하고, 쓰레기를 주우며 쾌적한 환경을 만드는 데 힘썼습니다.</li>
+                </ul>
+            </div>
+            <div class="info-item">
+                <div class="info-label">금융회계사업 동아리</div>
+                <div class="info-value">1학년부터 3학년까지 · 3학년 단장</div>
+                <ul class="activity-list">
+                    <li>서울머니쇼 박람회에 참여하고 경제 신문 스크랩 활동을 했습니다.</li>
+                    <li>구독 경제를 주제로 발표했습니다.</li>
+                    <li>3학년 때 단장으로서 후배와 동료들을 이끌고 원활하게 소통했습니다.</li>
+                </ul>
+            </div>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
 with vision:
-    st.markdown('<div class="section-kicker">04 / VISION</div>', unsafe_allow_html=True)
+    st.markdown('<div class="section-kicker">05 / VISION</div>', unsafe_allow_html=True)
     st.markdown('<h2 class="section-title">배움을 데이터의 가치로</h2>', unsafe_allow_html=True)
     st.markdown(
         '<p class="intro-copy">소프트웨어공학과에 진학해 전공 지식과 실무 역량을 차근차근 키우고, '
