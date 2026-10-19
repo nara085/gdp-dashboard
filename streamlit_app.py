@@ -302,6 +302,11 @@ with activities:
         """,
         unsafe_allow_html=True,
     )
+    st.markdown(
+        '<div class="award-line"><strong>2025년 FTA 실무인력 양성사업 모의 무역 실전대회 대상</strong><br>'
+        '자료 조사 및 검토 역할을 맡아 참여했으며, 산업통상부장관상을 수상했습니다.</div>',
+        unsafe_allow_html=True,
+    )
 
 with vision:
     st.markdown('<div class="section-kicker">05 / VISION</div>', unsafe_allow_html=True)
