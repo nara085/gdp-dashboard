@@ -61,7 +61,7 @@ st.markdown(
         background: transparent;
     }
 
-    .stTabs button[data-baseweb="tab"] {
+    .stTabs [data-baseweb="tab"] {
         min-height: 3.35rem;
         padding: .6rem .9rem;
         border: 1px solid #CBD5E1 !important;
@@ -72,18 +72,24 @@ st.markdown(
         font-weight: 700;
     }
 
-    .stTabs button[data-baseweb="tab"][aria-selected="true"] {
+    .stTabs [data-baseweb="tab"] * { color: #334155 !important; }
+
+    .stTabs [data-baseweb="tab"][aria-selected="true"] {
         border-color: #1E3A5F !important;
         background-color: #1E3A5F !important;
         color: #FFFFFF !important;
     }
 
-    .stTabs button[data-baseweb="tab"]:hover {
+    .stTabs [data-baseweb="tab"][aria-selected="true"] * { color: #FFFFFF !important; }
+
+    .stTabs [data-baseweb="tab"]:hover {
         background-color: #DBEAFE !important;
         color: #334155 !important;
     }
 
-    .stTabs button[data-baseweb="tab"][aria-selected="true"]:hover {
+    .stTabs [data-baseweb="tab"]:hover * { color: #334155 !important; }
+
+    .stTabs [data-baseweb="tab"][aria-selected="true"]:hover {
         background-color: #DBEAFE !important;
         color: #334155 !important;
     }
@@ -188,7 +194,7 @@ st.markdown(
         .hero p { font-size: .94rem; }
         div[data-testid="stImage"] { display: flex; justify-content: center; }
         .stTabs [data-baseweb="tab-list"] { gap: .35rem; }
-        .stTabs button[data-baseweb="tab"] {
+        .stTabs [data-baseweb="tab"] {
             min-height: 3rem;
             padding: .55rem .58rem;
             font-size: .8rem;
