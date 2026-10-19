@@ -305,6 +305,38 @@ with activities:
         '자료 조사 및 검토 역할을 맡아 참여했으며, 산업통상부장관상을 수상했습니다.</div>',
         unsafe_allow_html=True,
     )
+    st.markdown('<div class="section-kicker">교과 학습 및 탐구</div>', unsafe_allow_html=True)
+    st.markdown(
+        '<h2 class="section-title">확률과 통계 스트레스 인지율 데이터 분석 보고서</h2>',
+        unsafe_allow_html=True,
+    )
+    st.markdown(
+        """
+        <div class="activity-grid">
+            <div class="info-item">
+                <div class="info-label">활동 분야</div>
+                <div class="info-value">통계 분석, 건강 데이터, 사회 문제 탐색이야</div>
+            </div>
+            <div class="info-item">
+                <div class="info-label">활동 내용</div>
+                <div class="info-value">확률과 통계 수업에서 고등학생 연령대를 중심으로 스트레스 인지율 데이터를 살펴보고, 집단에 따라 스트레스를 느낄 확률이 어떻게 달라지는지 분석하는 보고서를 작성함.</div>
+            </div>
+            <div class="info-item">
+                <div class="info-label">주요 결과</div>
+                <div class="info-value">청소년 및 젊은 연령대에서 스트레스를 인지하는 비율이 상대적으로 높게 나타남을 확인함.</div>
+            </div>
+            <div class="info-item">
+                <div class="info-label">관련 역량</div>
+                <div class="info-value">통계적 사고, 데이터 해석, 자료 분석, 사회 문제 탐색</div>
+            </div>
+        </div>
+        <div class="info-item">
+            <div class="info-label">배운 점 및 느낀 점</div>
+            <div class="info-value">이번 탐구를 통해 스트레스와 같은 건강 관련 정보도 집단과 조건에 따라 달라지는 확률적인 데이터로 해석할 수 있다는 점을 이해했다. 특히 연령대에 따라 스트레스 인지율이 다르게 나타나는 것을 살펴보며, 건강 상태와 관련된 현상을 이해하기 위해서는 데이터를 수집하고 분석하는 과정이 중요하다는 것을 느꼈다. 또한 같은 연령대에서도 개인에 따라 스트레스를 느끼는 정도가 다를 수 있으므로, 집단별 통계뿐만 아니라 개인의 특성을 고려한 맞춤형 접근도 필요하다고 생각했다. 이를 계기로 건강 데이터 분석에 흥미를 갖게 되었으며, 앞으로 디지털 헬스케어 기기 개발 등 데이터와 IT 기술을 활용해 개인의 건강 관리를 지원하는 분야를 더 탐구하며 진로 적합성을 확인하고자 한다.</div>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
 
 with vision:
     st.markdown('<div class="section-kicker">05 / VISION</div>', unsafe_allow_html=True)
