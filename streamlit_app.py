@@ -42,14 +42,9 @@ st.markdown(
         text-transform: uppercase;
     }
 
-    .hero {
-        display: flex;
-        justify-content: space-between;
-        align-items: flex-end;
-        gap: 2rem;
-        padding: 1rem 0 2.7rem;
-        border-bottom: 1px solid var(--line);
-    }
+    .hero { padding: 1rem 0 2.7rem; }
+
+    .hero-divider { border-bottom: 1px solid var(--line); margin-bottom: 1rem; }
 
     .hero h1 {
         margin: .45rem 0 .55rem;
@@ -61,21 +56,6 @@ st.markdown(
     }
 
     .hero p { margin: 0; color: var(--muted); font-size: 1.08rem; }
-
-    .hero-mark {
-        display: grid;
-        place-items: center;
-        flex: 0 0 116px;
-        width: 116px;
-        height: 116px;
-        border: 1px solid rgba(23, 107, 82, .2);
-        border-radius: 50%;
-        background: var(--lime);
-        color: var(--green);
-        font-family: 'Gowun Batang', serif;
-        font-size: 2.6rem;
-        transform: rotate(8deg);
-    }
 
     .stTabs [data-baseweb="tab-list"] {
         gap: 2.1rem;
@@ -172,9 +152,9 @@ st.markdown(
 
     @media (max-width: 640px) {
         [data-testid="stMainBlockContainer"] { padding: 1.5rem 1.1rem 2rem; }
-        .hero { align-items: center; gap: 1rem; padding-bottom: 1.8rem; }
+        .hero { padding: 1rem 0 1.8rem; }
         .hero p { font-size: .94rem; }
-        .hero-mark { flex-basis: 76px; width: 76px; height: 76px; font-size: 1.8rem; }
+        div[data-testid="stImage"] { display: flex; justify-content: center; }
         .stTabs [data-baseweb="tab-list"] { gap: 1.1rem; }
         .stTabs [data-baseweb="tab"] { font-size: .82rem; }
         .info-grid { grid-template-columns: 1fr; gap: .65rem; }
@@ -185,21 +165,24 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-st.markdown(
-    """
-    <div class="hero">
-        <div>
+hero_text, hero_photo = st.columns([3, 1])
+with hero_text:
+    st.markdown(
+        """
+        <div class="hero">
             <div class="eyebrow">A little about me</div>
             <h1>안녕하세요,<br>유나라입니다.</h1>
             <p>배움을 꾸준히 이어가며, 받은 마음을 나누는 사람</p>
         </div>
-        <div class="hero-mark" aria-hidden="true">YN</div>
-    </div>
-    """,
-    unsafe_allow_html=True,
-)
+        """,
+        unsafe_allow_html=True,
+    )
+with hero_photo:
+    st.image("IMG/080530.png.JPG", width=230)
 
-home, about, vision = st.tabs(["HOME", "ABOUT ME", "VISION"])
+st.markdown('<div class="hero-divider"></div>', unsafe_allow_html=True)
+
+home, about, skills, vision = st.tabs(["HOME", "ABOUT ME", "SKILLS", "VISION"])
 
 with home:
     st.markdown('<div class="section-kicker">01 / INTRODUCTION</div>', unsafe_allow_html=True)
@@ -248,8 +231,33 @@ with about:
         unsafe_allow_html=True,
     )
 
+with skills:
+    st.markdown('<div class="section-kicker">03 / SKILLS</div>', unsafe_allow_html=True)
+    st.markdown('<h2 class="section-title">배우고 쌓아가는 IT 역량</h2>', unsafe_allow_html=True)
+    st.markdown(
+        """
+        <div class="info-grid">
+            <div class="info-item">
+                <div class="info-label">IT 역량</div>
+                <div class="info-value">한글 문서 작성<br>프레젠테이션 제작<br>스프레드시트 활용</div>
+            </div>
+            <div class="info-item">
+                <div class="info-label">학습 중인 기술</div>
+                <div class="info-value">IT 전공 기초를 꾸준히 학습하며<br>컴퓨터 활용 역량을 키우고 있습니다.</div>
+            </div>
+            <div class="info-item">
+                <div class="info-label">자격증</div>
+                <div class="info-value">ITQ 한글 A등급<br>ITQ 파워포인트 B등급<br>ITQ 엑셀 A등급</div>
+                <div class="info-label" style="margin-top: 1rem;">취득 계획</div>
+                <div class="info-value">컴퓨터활용능력 2급</div>
+            </div>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
 with vision:
-    st.markdown('<div class="section-kicker">03 / VISION</div>', unsafe_allow_html=True)
+    st.markdown('<div class="section-kicker">04 / VISION</div>', unsafe_allow_html=True)
     st.markdown('<h2 class="section-title">배움을 데이터의 가치로</h2>', unsafe_allow_html=True)
     st.markdown(
         '<p class="intro-copy">소프트웨어공학과에 진학해 전공 지식과 실무 역량을 차근차근 키우고, '
