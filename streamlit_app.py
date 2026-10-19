@@ -24,9 +24,7 @@ st.markdown(
     }
 
     .stApp {
-        background:
-            radial-gradient(ellipse at 90% 2%, rgba(216, 237, 141, .32), transparent 28rem),
-            linear-gradient(135deg, #f5f7f2 0%, #edf3ed 55%, #f8f5ed 100%);
+        background: #fff;
         color: var(--ink);
         font-family: 'DM Sans', 'Noto Sans KR', sans-serif;
     }
