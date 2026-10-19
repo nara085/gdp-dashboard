@@ -226,7 +226,7 @@ with hero_photo:
 st.markdown('<div class="hero-divider"></div>', unsafe_allow_html=True)
 
 home, about, skills, activities, vision = st.tabs(
-    ["HOME", "ABOUT ME", "SKILLS", "ACTIVITIES", "VISION"]
+    ["👩🏻 HOME", "💎 ABOUT ME", "🛠️ SKILLS", "🌱 ACTIVITIES", "🧭 VISION"]
 )
 
 with home:
