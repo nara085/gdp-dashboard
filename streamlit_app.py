@@ -56,24 +56,30 @@ st.markdown(
     .hero p { margin: 0; color: var(--muted); font-size: 1.08rem; }
 
     .stTabs [data-baseweb="tab-list"] {
-        gap: .6rem;
-        flex-wrap: nowrap;
-        overflow-x: auto;
+        display: grid;
+        grid-template-columns: repeat(6, minmax(0, 1fr));
+        gap: .5rem;
+        overflow: visible;
         border-bottom: 1px solid #CBD5E1;
         background: transparent;
     }
 
     .stTabs [role="tab"] {
         min-height: 3.35rem;
-        flex-shrink: 0;
-        padding: .6rem .9rem;
+        width: 100%;
+        min-width: 0;
+        box-sizing: border-box;
+        padding: .55rem .45rem;
         border: 1px solid #CBD5E1 !important;
         border-radius: 4px 4px 0 0;
         background-color: #F1F5F9 !important;
         color: #334155 !important;
-        font-size: .92rem;
+        font-size: .9rem;
         font-weight: 700;
-        white-space: nowrap;
+        line-height: 1.35;
+        text-align: center;
+        white-space: normal;
+        word-break: keep-all;
     }
 
     .stTabs [role="tab"] * { color: #334155 !important; }
@@ -116,6 +122,10 @@ st.markdown(
         font-size: 1.8rem;
         font-weight: 700;
     }
+
+    .section-heading { margin-bottom: 1.35rem; }
+    .section-heading .section-title { margin-bottom: .4rem; }
+    .section-description { margin: 0; color: var(--muted); font-size: .98rem; line-height: 1.7; }
 
     .intro-copy {
         max-width: 720px;
@@ -202,6 +212,10 @@ st.markdown(
 
     .stCaption { color: var(--muted); }
 
+    @media (max-width: 900px) {
+        .stTabs [data-baseweb="tab-list"] { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    }
+
     @media (max-width: 640px) {
         [data-testid="stMainBlockContainer"] { padding: 1.5rem 1.1rem 2rem; }
         .hero { padding: 1rem 0 1.8rem; }
@@ -211,7 +225,7 @@ st.markdown(
         .stTabs [role="tab"] {
             min-height: 3rem;
             padding: .55rem .58rem;
-            font-size: .8rem;
+            font-size: .82rem;
         }
         .info-grid { grid-template-columns: 1fr; gap: .65rem; }
         .activity-grid { grid-template-columns: 1fr; gap: .65rem; }
@@ -252,7 +266,11 @@ home, about, _projects, skills, activities, vision = st.tabs(
 
 with home:
     st.markdown('<div class="section-kicker">01 / INTRODUCTION</div>', unsafe_allow_html=True)
-    st.markdown('<h2 class="section-title">저를 소개합니다</h2>', unsafe_allow_html=True)
+    st.markdown(
+        '<div class="section-heading"><h2 class="section-title">저를 소개합니다</h2>'
+        '<p class="section-description">저의 기본 정보와 관심 분야를 소개합니다.</p></div>',
+        unsafe_allow_html=True,
+    )
     st.markdown(
         '<p class="intro-copy">경복비즈니스고등학교 IT과에 재학 중인 3학년 4반 유나라입니다. '
         '새로운 것을 배우고 꾸준히 실천하는 과정에서 보람을 느낍니다. '
@@ -272,7 +290,11 @@ with home:
 
 with about:
     st.markdown('<div class="section-kicker">02 / ABOUT ME</div>', unsafe_allow_html=True)
-    st.markdown('<h2 class="section-title">꾸준함으로 쌓은 책임감</h2>', unsafe_allow_html=True)
+    st.markdown(
+        '<div class="section-heading"><h2 class="section-title">꾸준함으로 쌓은 책임감</h2>'
+        '<p class="section-description">저의 성격과 강점, 가치관, 수상 경험을 담았습니다.</p></div>',
+        unsafe_allow_html=True,
+    )
     st.markdown(
         '<p class="intro-copy">아침자습 시간에 결석 없이 꾸준히 출석하며, 매일 아침 무엇을 공부할지 계획하고 '
         '실천해 왔습니다. 작은 약속과 일상의 노력을 이어온 경험은 맡은 일을 책임감 있게 해내는 힘이 되었습니다.</p>',
@@ -300,9 +322,21 @@ with about:
         unsafe_allow_html=True,
     )
 
+with _projects:
+    st.markdown('<div class="section-kicker">03 / PROJECTS</div>', unsafe_allow_html=True)
+    st.markdown(
+        '<div class="section-heading"><h2 class="section-title">프로젝트</h2>'
+        '<p class="section-description">전공 수업에서 진행한 프로젝트와 제작 결과물을 소개합니다.</p></div>',
+        unsafe_allow_html=True,
+    )
+
 with skills:
-    st.markdown('<div class="section-kicker">03 / SKILLS</div>', unsafe_allow_html=True)
-    st.markdown('<h2 class="section-title">배우고 쌓아가는 IT 역량</h2>', unsafe_allow_html=True)
+    st.markdown('<div class="section-kicker">04 / SKILLS</div>', unsafe_allow_html=True)
+    st.markdown(
+        '<div class="section-heading"><h2 class="section-title">배우고 쌓아가는 IT 역량</h2>'
+        '<p class="section-description">활용할 수 있는 기술과 도구, 취득한 자격증을 정리했습니다.</p></div>',
+        unsafe_allow_html=True,
+    )
     st.markdown(
         """
         <div class="info-grid">
@@ -326,8 +360,12 @@ with skills:
     )
 
 with activities:
-    st.markdown('<div class="section-kicker">04 / ACTIVITIES</div>', unsafe_allow_html=True)
-    st.markdown('<h2 class="section-title">함께 이끌고 소통한 경험</h2>', unsafe_allow_html=True)
+    st.markdown('<div class="section-kicker">05 / ACTIVITIES</div>', unsafe_allow_html=True)
+    st.markdown(
+        '<div class="section-heading"><h2 class="section-title">함께 이끌고 소통한 경험</h2>'
+        '<p class="section-description">학생회와 동아리 등 학교생활 속 다양한 활동을 담았습니다.</p></div>',
+        unsafe_allow_html=True,
+    )
     st.markdown(
         """
         <div class="activity-grid">
@@ -391,8 +429,12 @@ with activities:
     )
 
 with vision:
-    st.markdown('<div class="section-kicker">05 / VISION</div>', unsafe_allow_html=True)
-    st.markdown('<h2 class="section-title">배움을 데이터의 가치로</h2>', unsafe_allow_html=True)
+    st.markdown('<div class="section-kicker">06 / VISION</div>', unsafe_allow_html=True)
+    st.markdown(
+        '<div class="section-heading"><h2 class="section-title">배움을 데이터의 가치로</h2>'
+        '<p class="section-description">관심 분야와 앞으로의 진로 방향 및 목표를 소개합니다.</p></div>',
+        unsafe_allow_html=True,
+    )
     st.markdown(
         '<p class="intro-copy">소프트웨어공학과에 진학해 전공 지식과 실무 역량을 차근차근 키우고, '
         'IT 분야 중에서도 데이터를 다루는 기업에 취업하는 것이 목표입니다.</p>',
