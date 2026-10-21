@@ -57,12 +57,15 @@ st.markdown(
 
     .stTabs [data-baseweb="tab-list"] {
         gap: .6rem;
+        flex-wrap: nowrap;
+        overflow-x: auto;
         border-bottom: 1px solid #CBD5E1;
         background: transparent;
     }
 
     .stTabs [role="tab"] {
         min-height: 3.35rem;
+        flex-shrink: 0;
         padding: .6rem .9rem;
         border: 1px solid #CBD5E1 !important;
         border-radius: 4px 4px 0 0;
@@ -70,6 +73,7 @@ st.markdown(
         color: #334155 !important;
         font-size: .92rem;
         font-weight: 700;
+        white-space: nowrap;
     }
 
     .stTabs [role="tab"] * { color: #334155 !important; }
@@ -235,8 +239,15 @@ with hero_photo:
 
 st.markdown('<div class="hero-divider"></div>', unsafe_allow_html=True)
 
-home, about, skills, activities, vision = st.tabs(
-    ["👩🏻 HOME", "💎 ABOUT ME", "🛠️ SKILLS", "🌱 ACTIVITIES", "🧭 VISION"]
+home, about, _projects, skills, activities, vision = st.tabs(
+    [
+        "👩🏻 HOME · 홈",
+        "💎 ABOUT ME · 나를 소개합니다",
+        "💻 PROJECTS · 프로젝트",
+        "🛠️ SKILLS · 기술 역량",
+        "🌱 ACTIVITIES · 활동",
+        "🧭 VISION · 진로 목표",
+    ]
 )
 
 with home:
