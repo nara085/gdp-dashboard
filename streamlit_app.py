@@ -57,7 +57,7 @@ st.markdown(
 
     .stTabs [data-baseweb="tab-list"] {
         display: grid;
-        grid-template-columns: repeat(6, minmax(0, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(min(100%, 10rem), 1fr));
         gap: .5rem;
         overflow: visible;
         border-bottom: 1px solid #CBD5E1;
@@ -212,10 +212,6 @@ st.markdown(
 
     .stCaption { color: var(--muted); }
 
-    @media (max-width: 900px) {
-        .stTabs [data-baseweb="tab-list"] { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-    }
-
     @media (max-width: 640px) {
         [data-testid="stMainBlockContainer"] { padding: 1.5rem 1.1rem 2rem; }
         .hero { padding: 1rem 0 1.8rem; }
@@ -256,15 +252,19 @@ st.markdown('<div class="hero-divider"></div>', unsafe_allow_html=True)
 home, about, _projects, skills, activities, vision = st.tabs(
     [
         "👩🏻 HOME · 홈",
-        "💎 ABOUT ME · 나를 소개합니다",
+        "💎 ABOUT ME · 저를 소개합니다",
         "💻 PROJECTS · 프로젝트",
         "🛠️ SKILLS · 기술 역량",
         "🌱 ACTIVITIES · 활동",
         "🧭 VISION · 진로 목표",
     ]
 )
+subtab_labels = ["🏫 고등학교", "🎓 대학교"]
 
 with home:
+    home_high_school, _home_university = st.tabs(subtab_labels)
+
+with home, home_high_school:
     st.markdown('<div class="section-kicker">01 / INTRODUCTION</div>', unsafe_allow_html=True)
     st.markdown(
         '<div class="section-heading"><h2 class="section-title">저를 소개합니다</h2>'
@@ -289,6 +289,9 @@ with home:
     )
 
 with about:
+    about_high_school, _about_university = st.tabs(subtab_labels)
+
+with about, about_high_school:
     st.markdown('<div class="section-kicker">02 / ABOUT ME</div>', unsafe_allow_html=True)
     st.markdown(
         '<div class="section-heading"><h2 class="section-title">꾸준함으로 쌓은 책임감</h2>'
@@ -323,6 +326,9 @@ with about:
     )
 
 with _projects:
+    projects_high_school, _projects_university = st.tabs(subtab_labels)
+
+with _projects, projects_high_school:
     st.markdown('<div class="section-kicker">03 / PROJECTS</div>', unsafe_allow_html=True)
     st.markdown(
         '<div class="section-heading"><h2 class="section-title">프로젝트</h2>'
@@ -331,6 +337,9 @@ with _projects:
     )
 
 with skills:
+    skills_high_school, _skills_university = st.tabs(subtab_labels)
+
+with skills, skills_high_school:
     st.markdown('<div class="section-kicker">04 / SKILLS</div>', unsafe_allow_html=True)
     st.markdown(
         '<div class="section-heading"><h2 class="section-title">배우고 쌓아가는 IT 역량</h2>'
@@ -360,6 +369,9 @@ with skills:
     )
 
 with activities:
+    activities_high_school, _activities_university = st.tabs(subtab_labels)
+
+with activities, activities_high_school:
     st.markdown('<div class="section-kicker">05 / ACTIVITIES</div>', unsafe_allow_html=True)
     st.markdown(
         '<div class="section-heading"><h2 class="section-title">함께 이끌고 소통한 경험</h2>'
@@ -429,6 +441,9 @@ with activities:
     )
 
 with vision:
+    vision_high_school, _vision_university = st.tabs(subtab_labels)
+
+with vision, vision_high_school:
     st.markdown('<div class="section-kicker">06 / VISION</div>', unsafe_allow_html=True)
     st.markdown(
         '<div class="section-heading"><h2 class="section-title">배움을 데이터의 가치로</h2>'
